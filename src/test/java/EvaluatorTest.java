@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import org.wordle.core.GuessEvaluator;
 import org.wordle.core.IGuessEvaluator;
 import org.wordle.model.CharacterFeedback;
-import org.wordle.model.FeedBackType;
 
 import java.util.List;
 
