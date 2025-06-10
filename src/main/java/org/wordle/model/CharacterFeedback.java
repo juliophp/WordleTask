@@ -2,7 +2,7 @@ package org.wordle.model;
 
 public class CharacterFeedback {
     public FeedbackType FeedBackType;
-    public char letter;
+    private final char letter;
 
     public CharacterFeedback(char letter, FeedbackType feedbackType) {
         this.letter = letter;
@@ -11,5 +11,9 @@ public class CharacterFeedback {
 
     public FeedbackType getFeedBackType() {
         return FeedBackType;
+    }
+
+    public char getLetter() {
+        return letter;
     }
 }

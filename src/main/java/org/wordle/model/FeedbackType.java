@@ -16,4 +16,8 @@ public enum FeedbackType {
     public String getColor() {
         return color;
     }
+
+    public void colorize(char c, StringBuilder line) {
+        line.append(color).append(" ").append(c).append(" ").append(RESET);
+    }
 }
