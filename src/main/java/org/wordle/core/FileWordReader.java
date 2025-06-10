@@ -17,7 +17,9 @@ public class FileWordReader implements IWordReader {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         Function<String, Stream<String>> linesToWordStreamMapper =
                 line -> Arrays.stream(line.split(","));
-        wordList = lines.stream().flatMap(linesToWordStreamMapper).toArray(String[]::new);
+        wordList = lines.stream().flatMap(linesToWordStreamMapper)
+                    .map(String::trim)
+                    .toArray(String[]::new);
     }
 
     @Override

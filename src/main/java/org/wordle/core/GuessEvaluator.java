@@ -22,6 +22,7 @@ public class GuessEvaluator implements IGuessEvaluator {
                 used[i] = true;
             }
         }
+
         for (int i = 0; i < 5; i++) {
             if (fb[i] == null){
                 char g = guess.charAt(i);
