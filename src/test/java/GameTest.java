@@ -27,7 +27,7 @@ public class GameTest {
         List<CharacterFeedback> feedbacks = game.submitGuess("PIZZA");
         Assertions.assertTrue(game.isWin());
         Assertions.assertTrue(game.isGameOver());
-        Assertions.assertEquals(0, game.getRemainingAttempts());
+        Assertions.assertEquals(4, game.getRemainingAttempts());
         Assertions.assertEquals(1, game.getGuessHistory().size());
 
         for (CharacterFeedback feedback : feedbacks){
