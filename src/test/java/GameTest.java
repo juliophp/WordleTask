@@ -5,6 +5,7 @@ import org.wordle.core.GuessEvaluator;
 import org.wordle.core.IGame;
 import org.wordle.core.IGuessEvaluator;
 import org.wordle.core.WordleGame;
+import org.wordle.exceptions.GuessWordLengthException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 
@@ -32,6 +33,12 @@ public class GameTest {
         for (CharacterFeedback feedback : feedbacks){
             Assertions.assertEquals(FeedbackType.CORRECT, feedback.getFeedBackType());
         }
+    }
+
+    @Test
+    public void test_validateGuessWordLength(){
+        Assertions.assertThrows(GuessWordLengthException.class, () -> game.submitGuess("PIZZ"));
+        Assertions.assertThrows(GuessWordLengthException.class, () -> game.submitGuess("PIZZER"));
     }
 
 }

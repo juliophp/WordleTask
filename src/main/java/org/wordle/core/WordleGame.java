@@ -1,5 +1,6 @@
 package org.wordle.core;
 
+import org.wordle.exceptions.GuessWordLengthException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 
@@ -11,7 +12,7 @@ public class WordleGame implements IGame {
     private final IGuessEvaluator evaluator;
     private final List<List<CharacterFeedback>> guessHistory;
     private boolean win = false;
-    private int remainingAttempts = 1;
+    private int remainingAttempts = 5;
 
     public WordleGame(String targetWord, IGuessEvaluator evaluator) {
         this.targetWord = targetWord.toUpperCase();
@@ -21,6 +22,7 @@ public class WordleGame implements IGame {
 
     @Override
     public List<CharacterFeedback> submitGuess(String guess) {
+        if (guess.length() != 5) throw new GuessWordLengthException("Guess must be 5 characters");
         if (isGameOver()) throw new IllegalStateException("Game is over");
         List<CharacterFeedback> feedback = evaluator.evaluateGuess(targetWord, guess);
         guessHistory.add(feedback);

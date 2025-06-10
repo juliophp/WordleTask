@@ -26,17 +26,13 @@ public class ConsoleUI {
         while (!game.isGameOver()){
             System.out.printf("\n Enter your guess (%d attempts left): ", game.getRemainingAttempts());
             String guess = scanner.nextLine().trim().toLowerCase();
-            if (guess.length() != 5){
-                System.out.println("Invalid guess, must be 5 characters");
-                continue;
-            }
             game.submitGuess(guess);
             printFeedBack(game.getGuessHistory());
         }
         if (game.isWin()){
             System.out.println("Congratulations, You won!");
         }else{
-            System.out.println("You have used up all your attempts, sorry!");
+            System.out.printf("You have used up all your attempts, sorry! \n The word was %s \n", targetWord);
         }
         System.out.println("Thanks for playing!");
     }
