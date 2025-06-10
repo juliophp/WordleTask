@@ -19,7 +19,7 @@ public class ConsoleUI extends FeedbackUI{
         IWordReader wordReader = new FileWordReader("src/words.txt");
         String targetWord = wordReader.getRandomWord();
 
-        IGame game = new WordleGame(targetWord, new GuessEvaluator());
+        IGame game = new WordleGame(targetWord, new GuessEvaluator(), 5);
         while (!game.isGameOver()){
             System.out.printf("\n Enter your guess (%d attempts left): ", game.getRemainingAttempts());
             String guess = scanner.nextLine().trim().toLowerCase();

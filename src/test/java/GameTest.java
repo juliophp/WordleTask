@@ -18,7 +18,7 @@ public class GameTest {
     @BeforeEach
     public void setup(){
         IGuessEvaluator evaluator = new GuessEvaluator();
-        game = new WordleGame("PIZZA", evaluator);
+        game = new WordleGame("PIZZA", evaluator, 2);
     }
 
 
@@ -27,7 +27,7 @@ public class GameTest {
         List<CharacterFeedback> feedbacks = game.submitGuess("PIZZA");
         Assertions.assertTrue(game.isWin());
         Assertions.assertTrue(game.isGameOver());
-        Assertions.assertEquals(4, game.getRemainingAttempts());
+        Assertions.assertEquals(1, game.getRemainingAttempts());
         Assertions.assertEquals(1, game.getGuessHistory().size());
 
         for (CharacterFeedback feedback : feedbacks){

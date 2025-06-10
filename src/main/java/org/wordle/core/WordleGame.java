@@ -12,12 +12,13 @@ public class WordleGame implements IGame {
     private final IGuessEvaluator evaluator;
     private final List<List<CharacterFeedback>> guessHistory;
     private boolean win = false;
-    private int remainingAttempts = 5;
+    private int remainingAttempts;
 
-    public WordleGame(String targetWord, IGuessEvaluator evaluator) {
+    public WordleGame(String targetWord, IGuessEvaluator evaluator, int attempts) {
         this.targetWord = targetWord.toUpperCase();
         this.evaluator = evaluator;
         this.guessHistory = new ArrayList<>();
+        this.remainingAttempts = attempts;
     }
 
     @Override
