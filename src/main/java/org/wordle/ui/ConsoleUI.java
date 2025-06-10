@@ -1,14 +1,11 @@
 package org.wordle.ui;
 
 import org.wordle.core.*;
-import org.wordle.model.CharacterFeedback;
-import org.wordle.model.FeedbackType;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleUI {
+public class ConsoleUI extends FeedbackUI{
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -37,27 +34,5 @@ public class ConsoleUI {
         System.out.println("Thanks for playing!");
     }
 
-    private static void printFeedBack(List<List<CharacterFeedback>> guessHistory){
-        StringBuilder line = new StringBuilder();
-        for (List<CharacterFeedback> feedbacks : guessHistory){
-            for (CharacterFeedback characterFeedback : feedbacks){
-                char c = Character.toUpperCase(characterFeedback.getLetter());
-                switch (characterFeedback.getFeedBackType()){
-                    case CORRECT:
-                        FeedbackType.CORRECT.colorize(c, line);
-                        continue;
-                    case MISPLACED:
-                        FeedbackType.MISPLACED.colorize(c, line);
-                        continue;
-                    case ABSENT:
-                        FeedbackType.ABSENT.colorize(c, line);
-                        continue;
-                    default:{}
-                }
-            }
-            line.append("\n");
-        }
-        System.out.println(line);
-    }
 
 }
