@@ -3,6 +3,7 @@ name: JUnit Tests
 on:
   pull_request:
     branches: [ master ] # Replace with your main branch
+  workflow_dispatch:     # Allows manual triggering from the GitHub UI
 
 permissions:
   contents: read
@@ -25,7 +26,7 @@ jobs:
         run: mvn test
 
       - name: Upload Surefire reports (only for same-repo PRs)
-        if: github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
