@@ -2,28 +2,22 @@ name: JUnit Tests
 
 on:
   pull_request_target:
-    branches: [ master ] # Replace with your default branch
-  workflow_dispatch:     # Allow manual triggering from the GitHub UI
+    branches: [ master ]
+  workflow_dispatch:
 
 permissions:
   contents: read
   actions: write
+  checks: write  # ✅ Required for dorny/test-reporter
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      # ⚠️ SECURITY: Do NOT checkout PR code directly unless it's safe to do so.
-      - name: Checkout code from base (safe)
+      - name: Checkout base code (safe)
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.base.ref }}
-
-      # ✅ Only do the following if you trust the PR or validate it first
-      # - name: Checkout PR code (risky if untrusted)
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Set up JDK 8
         uses: actions/setup-java@v3
