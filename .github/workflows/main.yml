@@ -18,13 +18,20 @@ jobs:
           distribution: 'temurin'
 
       - name: Run tests
-        run: mvn test # Or ./gradlew test
+        run: mvn test
+
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
 
       - name: Report tests
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: JUnit Tests
-          path: target/surefire-reports/*.xml # Or build/test-results/test/*.xml
+          path: target/surefire-reports/*.xml
           reporter: java-junit
           fail-on-error: false
