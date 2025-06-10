@@ -17,13 +17,13 @@ public class GameTest {
     @BeforeEach
     public void setup(){
         IGuessEvaluator evaluator = new GuessEvaluator();
-        this.game = new WordleGame("PIZZA", evaluator);
+        game = new WordleGame("PIZZA", evaluator);
     }
 
 
     @Test
     public void test_setupGameAndSubmitGuess(){
-        List<CharacterFeedback> feedbacks = game.submitGuess();
+        List<CharacterFeedback> feedbacks = game.submitGuess("PIZZA");
         Assertions.assertTrue(game.isWin());
         Assertions.assertTrue(game.isGameOver());
         Assertions.assertEquals(0, game.getRemainingAttempts());
