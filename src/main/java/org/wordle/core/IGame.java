@@ -2,11 +2,10 @@ package org.wordle.core;
 
 import org.wordle.model.CharacterFeedback;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface IGame {
-    List<CharacterFeedback> submitGuess();
+    List<CharacterFeedback> submitGuess(String guess);
 
     boolean isWin();
 
@@ -14,5 +13,5 @@ public interface IGame {
 
     int getRemainingAttempts();
 
-    List<CharacterFeedback> getGuessHistory();
+    List<List<CharacterFeedback>> getGuessHistory();
 }
