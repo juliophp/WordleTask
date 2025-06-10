@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ master ] # Replace with your main branch
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,8 +24,8 @@ jobs:
       - name: Run tests
         run: mvn test
 
-      - name: Upload Surefire reports
-        if: always()
+      - name: Upload Surefire reports (only for same-repo PRs)
+        if: github.event.pull_request.head.repo.full_name == github.repository
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
