@@ -1,6 +1,7 @@
-package org.wordle.core;
+package org.wordle.core.impl;
 
 import org.wordle.config.AppConfig;
+import org.wordle.core.IGuessEvaluator;
 import org.wordle.exceptions.GuessTargetMismatchException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
@@ -9,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuessEvaluator implements IGuessEvaluator {
-    private final AppConfig configInstance;
+    private final AppConfig configInstance = AppConfig.getInstance();;
 
     public GuessEvaluator() {
-        this.configInstance = AppConfig.getInstance();
     }
 
     @Override

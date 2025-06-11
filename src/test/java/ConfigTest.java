@@ -14,6 +14,6 @@ public class ConfigTest {
     public void test_canReadConfigFromFile() {
         Assertions.assertEquals(5, configInstance.getNumberOfGuessesAllowedInGame());
         Assertions.assertEquals(5, configInstance.getNumberOfLettersAllowedInGuessWord());
-        Assertions.assertEquals("src/words.txt", configInstance.getFilePathToReadWords());
+        Assertions.assertEquals("words.txt", configInstance.getFilePathToReadWords());
     }
 }

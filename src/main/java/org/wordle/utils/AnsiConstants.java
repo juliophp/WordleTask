@@ -1,4 +1,4 @@
-package org.wordle.model;
+package org.wordle.utils;
 
 public class AnsiConstants {
     public static final String RESET = "\u001B[0m";

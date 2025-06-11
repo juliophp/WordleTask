@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.wordle.core.GuessEvaluator;
+import org.wordle.core.impl.GuessEvaluator;
 import org.wordle.core.IGuessEvaluator;
 import org.wordle.model.CharacterFeedback;
 
 import java.util.List;
 
-import static org.wordle.model.AnsiConstants.*;
+import static org.wordle.utils.AnsiConstants.*;
 
 public class EvaluatorTest {
 
