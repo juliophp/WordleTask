@@ -1,30 +1,35 @@
 package org.wordle.ui;
 
+import org.wordle.config.AppConfig;
 import org.wordle.core.*;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ConsoleUI extends FeedbackUI{
+import static org.wordle.utils.UIUtils.*;
 
+public class ConsoleUI {
+    private final AppConfig configInstance;
     private final Scanner scanner = new Scanner(System.in);
 
+    public ConsoleUI() {
+        this.configInstance = AppConfig.getInstance();
+    }
+
     public void run() throws IOException {
-        System.out.println("Welcome to Wordle! " +
-                "\n Enter a 5 letter word to start " +
-                "\n You have 5 attempts" +
-                "\n green = correct, yellow = present," +
-                " white = absent");
-
-        IWordReader wordReader = new FileWordReader("src/words.txt");
+        printGameIntro(configInstance);
+        IWordReader wordReader = new FileWordReader(configInstance.getFilePathToReadWords());
         String targetWord = wordReader.getRandomWord();
-
-        IGame game = new WordleGame(targetWord, new GuessEvaluator(), 5);
+        IGame game = new WordleGame(targetWord, new GuessEvaluator(), configInstance.getNumberOfGuessesAllowedInGame());
         while (!game.isGameOver()){
             System.out.printf("\n Enter your guess (%d attempts left): ", game.getRemainingAttempts());
             String guess = scanner.nextLine().trim().toLowerCase();
+            if (guess.length() != configInstance.getNumberOfLettersAllowedInGuessWord()){
+                System.out.printf("Invalid guess, must be %d characters \n", configInstance.getNumberOfLettersAllowedInGuessWord());
+                continue;
+            }
             game.submitGuess(guess);
-            printFeedBack(game.getGuessHistory());
+            printFeedbackFromGuessHistory(game.getGuessHistory());
         }
         if (game.isWin()){
             System.out.println("Congratulations, You won!");
