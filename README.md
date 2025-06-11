@@ -47,5 +47,6 @@ A command-line implementation of **Wordle** built in Java. This game replicates 
 - The requirement specifies 5 letters in a guess, should be designed for the possibility of extension. 
 - If the game requirement is 5 letters, both user input and file readers should only allow the same number, 5 in this case.
 - The guess attempt in the game was also required to be 5, should also to be extended.
+- config file was added to main java for the purpose of ease of testing, since it contains no sensitive information
 
    
