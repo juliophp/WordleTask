@@ -29,7 +29,7 @@ public class WordleGame implements IGame {
     @Override
     public List<CharacterFeedback> submitGuess(String guess) {
         if (guess.length() != config.getNumberOfLettersAllowedInGuessWord()){
-            throw new GuessWordLengthException("Guess must be "+ config.getNumberOfLettersAllowedInGuessWord() +" characters");
+            throw new GuessWordLengthException("must be "+ config.getNumberOfLettersAllowedInGuessWord() +" characters");
         }
         if (isGameOver()) throw new IllegalStateException("Game is over");
         List<CharacterFeedback> feedback = evaluator.evaluateGuess(targetWord, guess);

@@ -20,7 +20,7 @@ public class GuessEvaluator implements IGuessEvaluator {
         target = target.toUpperCase();
         guess = guess.toUpperCase();
         if (target.length() != guess.length()) {
-            throw new GuessTargetMismatchException("Guess and target words must be the same length");
+            throw new GuessTargetMismatchException("Guess and target words must have same length");
         }
         int numberOfLettersAllowedInGuessWord = configInstance.getNumberOfLettersAllowedInGuessWord();
         List<CharacterFeedback> result = new ArrayList<>();
