@@ -1,13 +1,13 @@
 package org.wordle.core;
 
 import org.wordle.config.AppConfig;
-import org.wordle.exceptions.GuessTargetMismatchException;
-import org.wordle.exceptions.GuessWordLengthException;
+import org.wordle.exceptions.WordValidationException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class WordleGame implements IGame {
     private final String targetWord;
@@ -28,8 +28,8 @@ public class WordleGame implements IGame {
 
     @Override
     public List<CharacterFeedback> submitGuess(String guess) {
-        if (guess.length() != config.getNumberOfLettersAllowedInGuessWord()){
-            throw new GuessWordLengthException("must be "+ config.getNumberOfLettersAllowedInGuessWord() +" characters");
+        if (!Pattern.compile(config.getAllowedRegexPatternForWords()).matcher(guess).matches()){
+            throw new WordValidationException(config.getFailedRegexMessage());
         }
         if (isGameOver()) throw new IllegalStateException("Game is over");
         List<CharacterFeedback> feedback = evaluator.evaluateGuess(targetWord, guess);
