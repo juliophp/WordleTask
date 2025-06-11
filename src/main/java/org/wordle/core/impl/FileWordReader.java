@@ -7,19 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class FileWordReader implements IWordReader {
     private final String[] wordList;
     private  final Random random = new Random();
 
-    public FileWordReader(String fileName) throws IOException {
+    public FileWordReader(String fileName, Pattern allowedPattern) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
-        Function<String, Stream<String>> linesToWordStreamMapper =
-                line -> Arrays.stream(line.split(","));
+        Function<String, Stream<String>> linesToWordStreamMapper = line -> Arrays.stream(line.split(","));
         wordList = lines.stream().flatMap(linesToWordStreamMapper)
-                    .map(String::trim)
-                    .toArray(String[]::new);
+                .map(String::trim)
+                .filter(word -> allowedPattern.matcher(word).matches())
+                .toArray(String[]::new);
     }
 
     @Override
