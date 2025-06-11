@@ -1,7 +1,6 @@
 package org.wordle.utils;
 
 import org.wordle.config.AppConfig;
-import org.wordle.model.AnsiConstants;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 

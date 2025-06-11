@@ -1,7 +1,5 @@
 package org.wordle.config;
 
-import org.wordle.Main;
-
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -39,6 +37,14 @@ public class AppConfig {
 
     public String getFilePathToReadWords() {
         return properties.getProperty("file_path_to_read_words");
+    }
+
+    public String getValidationPatternForWords() {
+        return String.format(properties.getProperty("allowed_pattern.regexp"), getNumberOfLettersAllowedInGuessWord());
+    }
+
+    public String getFailedRegexMessage() {
+        return properties.getProperty("failed_reg_exp_message");
     }
 
     public static AppConfig getInstance() {

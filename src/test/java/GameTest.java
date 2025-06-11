@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.wordle.core.GuessEvaluator;
+import org.wordle.core.impl.GuessEvaluator;
 import org.wordle.core.IGame;
 import org.wordle.core.IGuessEvaluator;
-import org.wordle.core.WordleGame;
-import org.wordle.exceptions.GuessWordLengthException;
+import org.wordle.core.impl.WordleGame;
+import org.wordle.exceptions.WordValidationException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 
@@ -37,8 +37,8 @@ public class GameTest {
 
     @Test
     public void test_validateGuessWordLength(){
-        Assertions.assertThrows(GuessWordLengthException.class, () -> game.submitGuess("PIZZ"));
-        Assertions.assertThrows(GuessWordLengthException.class, () -> game.submitGuess("PIZZER"));
+        Assertions.assertThrows(WordValidationException.class, () -> game.submitGuess("PIZZ"));
+        Assertions.assertThrows(WordValidationException.class, () -> game.submitGuess("PIZZER"));
     }
 
 }

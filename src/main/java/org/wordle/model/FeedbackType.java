@@ -1,7 +1,7 @@
 package org.wordle.model;
 
 
-import static org.wordle.model.AnsiConstants.*;
+import static org.wordle.utils.AnsiConstants.*;
 
 public enum FeedbackType {
 
