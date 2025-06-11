@@ -4,23 +4,24 @@ import org.wordle.Main;
 
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class AppConfig {
     private static AppConfig instance = null;
     Properties properties = new Properties();
+    private static final Logger LOGGER = Logger.getLogger(AppConfig.class.getName());
 
 
     public AppConfig() {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
+                LOGGER.severe("Sorry, unable to find config.properties");
                 return;
             }
             properties.load(input);
         }
         catch (Exception e) {
-            System.out.println("Sorry, unable to find config.properties");
-            return;
+            LOGGER.severe("Error: " + e.getMessage());
         }
 
     }

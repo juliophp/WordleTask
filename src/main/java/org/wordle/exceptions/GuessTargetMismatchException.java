@@ -5,6 +5,6 @@ import java.util.InputMismatchException;
 
 public class GuessTargetMismatchException extends InputMismatchException {
     public GuessTargetMismatchException(String message) {
-        super(message);
+        super("Guess and Target Mismatch: "+message);
     }
 }
