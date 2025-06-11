@@ -5,7 +5,7 @@ import static org.wordle.model.AnsiConstants.*;
 
 public enum FeedbackType {
 
-    MISPLACED(YELLOW), CORRECT(GREEN), ABSENT(WHITE);
+    MISPLACED(YELLOW), CORRECT(GREEN), ABSENT(RESET);
 
     private final String color;
 

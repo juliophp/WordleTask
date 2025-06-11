@@ -1,5 +1,7 @@
 package org.wordle.core;
 
+import org.wordle.config.AppConfig;
+import org.wordle.exceptions.GuessTargetMismatchException;
 import org.wordle.model.CharacterFeedback;
 import org.wordle.model.FeedbackType;
 
@@ -7,27 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuessEvaluator implements IGuessEvaluator {
+    private final AppConfig configInstance;
+
+    public GuessEvaluator() {
+        this.configInstance = AppConfig.getInstance();
+    }
+
     @Override
     public List<CharacterFeedback> evaluateGuess(String target, String guess) {
-
         target = target.toUpperCase();
         guess = guess.toUpperCase();
-        List<CharacterFeedback> result = new ArrayList<>(5);
-        FeedbackType[] fb = new FeedbackType[5];
-        boolean[] used = new boolean[5];
+        if (target.length() != guess.length()) {
+            throw new GuessTargetMismatchException("Guess and target words must be the same length");
+        }
+        int numberOfLettersAllowedInGuessWord = configInstance.getNumberOfLettersAllowedInGuessWord();
+        List<CharacterFeedback> result = new ArrayList<>();
+        FeedbackType[] fb = new FeedbackType[numberOfLettersAllowedInGuessWord];
+        boolean[] used = new boolean[numberOfLettersAllowedInGuessWord];
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfLettersAllowedInGuessWord; i++) {
             if (guess.charAt(i) == target.charAt(i)) {
                 fb[i] = FeedbackType.CORRECT;
                 used[i] = true;
             }
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfLettersAllowedInGuessWord; i++) {
             if (fb[i] == null){
                 char g = guess.charAt(i);
                 boolean matched = false;
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j < numberOfLettersAllowedInGuessWord; j++) {
                     if (!used[j] && target.charAt(j) == g){
                         fb[i] = FeedbackType.MISPLACED;
                         used[j] = true;
@@ -41,7 +52,7 @@ public class GuessEvaluator implements IGuessEvaluator {
             }
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfLettersAllowedInGuessWord; i++) {
             result.add(new CharacterFeedback(guess.charAt(i), fb[i]));
         }
         return result;
