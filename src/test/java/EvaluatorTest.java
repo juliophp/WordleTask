@@ -21,7 +21,7 @@ public class EvaluatorTest {
         Assertions.assertEquals(YELLOW, feedback.get(0).getFeedBackType().getColor());
         Assertions.assertEquals(YELLOW, feedback.get(1).getFeedBackType().getColor());
         Assertions.assertEquals(GREEN, feedback.get(2).getFeedBackType().getColor());
-        Assertions.assertEquals(WHITE, feedback.get(3).getFeedBackType().getColor());
+        Assertions.assertEquals(RESET, feedback.get(3).getFeedBackType().getColor());
         Assertions.assertEquals(YELLOW, feedback.get(4).getFeedBackType().getColor());
     }
 
@@ -31,7 +31,7 @@ public class EvaluatorTest {
         String target = "WATER";
         String guess = "OTTER";
         List<CharacterFeedback> feedback = evaluator.evaluateGuess(target, guess);
-        Assertions.assertEquals(WHITE, feedback.get(1).getFeedBackType().getColor());
+        Assertions.assertEquals(RESET, feedback.get(1).getFeedBackType().getColor());
         Assertions.assertEquals(GREEN, feedback.get(2).getFeedBackType().getColor());
     }
 }
