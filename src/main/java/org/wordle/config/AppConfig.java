@@ -1,6 +1,8 @@
 package org.wordle.config;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -12,20 +14,13 @@ public class AppConfig {
 
     public AppConfig() {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                LOGGER.severe("Sorry, unable to find config.properties");
-                return;
-            }
+            Optional.ofNullable(input).orElseThrow(() -> new IOException("Sorry, unable to find config.properties"));
             properties.load(input);
         }
         catch (Exception e) {
             LOGGER.severe("Error: " + e.getMessage());
         }
-
     }
-
-
-
 
     public int getNumberOfLettersAllowedInGuessWord() {
         return Integer.parseInt(properties.getProperty("number_of_letters_allowed_in_guess_word"));
